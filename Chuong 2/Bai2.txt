@@ -1,0 +1,8 @@
+Câu hỏi số 2:
+    Chương trình server.c đầu tiên tạo một socket TCP bằng socket(), sau đó tạo một cấu trúc địa chỉ Ipv4 trên tất cả 
+các địa chỉ mạng đang có của máy bằng cách cấu hình biến địa chỉ address. Chương trình tiếp theo sử dụng bind() để gán socket
+vào đối tượng địa chỉ address và thiết lập lắng nghe kết nối bằng listen(). Hàm accept() được dùng để chấp nhận kết nối của một
+client và tạo socket mới để lắng nghe thông điệp từ client và phản hồi lại.
+    Chương trình client.c cũng tạo một socket TCP bằng socket(), cấu hình biến địa chỉ Ipv4 serv_addr đại diện cho địa chỉ và 
+số cổng của server, sử dụng inet_pton để chuyển địa chỉ IP từ dạng thập phân sang nhị phân. Hàm connect() sử dụng để thiết lập
+kết nối TCP giữa client socket với server. Sau đó client dùng hàm send() để gửi thông điệp và read để đọc lại thông điệp từ server.

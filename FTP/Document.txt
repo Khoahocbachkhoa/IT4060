@@ -1,0 +1,1 @@
+Đây là một file được lưu trữ trên ftp server.

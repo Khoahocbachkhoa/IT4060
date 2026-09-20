@@ -1,0 +1,16 @@
+select(): quản lý một tập các fd bằng fd_set và các hàm thao tác như FD_SET, FD_ISSET, FD_CLEAR, ...
+pselect(): select() kết hợp tính năng quản lý tín hiệu an toàn
+poll(): quản lý tập các fd bằng mảng pollfd
+
+Trong ứng dụng trên, em sử dụng poll() để thực hiện IO multiplexing
+Trong chương trình client, người dùng nhập tên và kết nối server, poll() được dùng để quản lý stdin và sockfd của socket
+kết nối server
+Trong chương trình server, server dùng mảng pollfd với phần tử đầu là listenfd để lắng nghe kết nối, khi có kết nối mới
+thì thêm vào pollfd, duyệt qua từng phần tử để xử lý tin nhắn và broadcast cho client khác. Khi một client ngắt kết nối, dồn client
+ở cuối mảng vào vị trí đó để tránh fd rác.
+
+Khó khăn chính:
+- Chương trình rất khó debug: lỗi vòng lặp, quên không xử lý client ngắt kết nối, quên không kiểm tra giá trị trả về của read, send, ...
+- Thiết kế giao thức: Không thiết kế cẩn thận có thể lẫn tên của client gửi với tin nhắn
+- Xử lý client ngắt kết nối: Nếu dồn toàn bộ mảng pollfd sẽ rất tốn chi phí thời gian
+- Lỗi tràn bộ đệm : gửi thừa byte rác, quên ko đặt '\n' ở cuối xâu

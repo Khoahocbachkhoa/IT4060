@@ -1,0 +1,3 @@
+stdout da sang!
+0
+stdin da san sang!
